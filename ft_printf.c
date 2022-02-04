@@ -6,7 +6,15 @@
 /*   By: jcobos-d <jcobos-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 18:38:30 by jcobos-d          #+#    #+#             */
-/*   Updated: 2022/02/04 18:39:14 by jcobos-d         ###   ########.fr       */
+/*   Updated: 2022/02/04 18:48:37 by jcobos-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "ft_printf.h"
+
+
+int	ft_printf(const char *str, ...)
+{
+	(void)str;
+	return 1;
+}
