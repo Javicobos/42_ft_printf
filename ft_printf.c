@@ -6,7 +6,7 @@
 /*   By: jcobos-d <jcobos-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 18:38:30 by jcobos-d          #+#    #+#             */
-/*   Updated: 2022/02/07 16:44:09 by jcobos-d         ###   ########.fr       */
+/*   Updated: 2022/02/07 18:02:15 by jcobos-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,26 +31,37 @@ int	ft_printf(const char *str, ...)
 				char c = va_arg(arguments, int);
 				write(1, &c, 1);
 			}
-			//else if (*(str + 1) == 's')
-			//	ft_putstr_fd(va_arg(arguments, char *), 1);
-//			else if (*(str + 1) == 'p')
+			else if (*(str + 1) == 's')
+			{
+				char *strvar = va_arg(arguments, char *);
+				ft_putstr_fd(strvar, 1);
+			}
+			//			else if (*(str + 1) == 'p')
 				//print pointer
-//			else if (*(str + 1) == 'd' || *(str + 1) == 'i')
-				//putnbr
-//			else if (*(str + 1) == 'u')
-				//putnbr unsigned
-//			else if (*(str + 1) == 'x')
-				//putnbr base hexa small
+			else if (*(str + 1) == 'd' || *(str + 1) == 'i')
+				{
+					int n = va_arg(arguments, int);
+					ft_putnbr_fd(n, 1);
+				}
+			else if (*(str + 1) == 'u')
+				{
+					unsigned int n = va_arg(arguments, unsigned int);
+					ft_putnbr_fd(n, 1); //this bad
+				}
+			//else if (*(str + 1) == 'x')
+			//{
+				//putnbr base
+			//}
 //			else if (*(str + 1) == 'X')
 				//putnbr base hexa big
 			else if (*(str + 1) == '%')
-				write(1, "P", 1);
+				write(1, "%", 1);
 			str++;
 		}
 		str++;
 	}
-	write(1, "done in printf\n", 16);
-	//va_end(arguments);
+	//write(1, "done in printf\n", 16);
+	va_end(arguments);
 
 	return 1;
 }
