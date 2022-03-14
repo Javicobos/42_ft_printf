@@ -6,7 +6,7 @@
 /*   By: jcobos-d <jcobos-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 18:38:30 by jcobos-d          #+#    #+#             */
-/*   Updated: 2022/02/07 18:02:15 by jcobos-d         ###   ########.fr       */
+/*   Updated: 2022/03/14 19:33:21 by jcobos-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,36 +17,37 @@
 int	ft_printf(const char *str, ...)
 {
 	va_list	arguments;
-	//int		retval;
+	int		retval;
 
 	va_start(arguments, str);
+	retval = 0;
 	while (*str)
 	{
 		if (*str != '%')
-			write(1, str, 1);
+			retval += write(1, str, 1);
 		else
 		{
 			if (*(str + 1) == 'c')
 			{
 				char c = va_arg(arguments, int);
-				write(1, &c, 1);
+				retval += write(1, &c, 1); // could we do: retval += write(1, &va_arg(arguments, int), 1) ??
 			}
 			else if (*(str + 1) == 's')
 			{
 				char *strvar = va_arg(arguments, char *);
-				ft_putstr_fd(strvar, 1);
+				ft_putstr_fd(strvar, 1);	//modify to count characters, see below
 			}
 			//			else if (*(str + 1) == 'p')
 				//print pointer
 			else if (*(str + 1) == 'd' || *(str + 1) == 'i')
 				{
 					int n = va_arg(arguments, int);
-					ft_putnbr_fd(n, 1);
+					ft_putnbr_fd(n, 1);		//modify to count characters
 				}
 			else if (*(str + 1) == 'u')
 				{
 					unsigned int n = va_arg(arguments, unsigned int);
-					ft_putnbr_fd(n, 1); //this bad
+					ft_putnbr_fd(n, 1);		//this bad, count chars
 				}
 			//else if (*(str + 1) == 'x')
 			//{
@@ -55,13 +56,27 @@ int	ft_printf(const char *str, ...)
 //			else if (*(str + 1) == 'X')
 				//putnbr base hexa big
 			else if (*(str + 1) == '%')
-				write(1, "%", 1);
+				retval += write(1, "%", 1);
 			str++;
 		}
 		str++;
 	}
-	//write(1, "done in printf\n", 16);
 	va_end(arguments);
 
-	return 1;
+	return (retval);
+}
+
+int	ft_putstr_fd_counter(char *s, int fd)
+{
+	int	pos;
+
+	if (!s)
+		return (-1);
+	pos = 0;
+	while (s[pos])
+	{
+		write(fd, s + pos, 1); // can I pos += write?
+		pos++;
+	}
+	return (pos);
 }
