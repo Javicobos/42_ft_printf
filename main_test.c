@@ -27,4 +27,6 @@ int main()
 	int e2 = printf("%s is at %p \n", mystring, mystring);
 	int e3 = printf("my int is %i and C's int is %i\n \n", e, e2);
 	return 0;
+
+	//testing git
 }
