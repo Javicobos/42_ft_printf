@@ -6,7 +6,7 @@
 /*   By: jcobos-d <jcobos-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 14:53:38 by jcobos-d          #+#    #+#             */
-/*   Updated: 2021/11/18 17:47:22 by jcobos-d         ###   ########.fr       */
+/*   Updated: 2022/03/21 16:25:21 by jcobos-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char	*ft_itoa(int n)
 	goal[digits-- + is_neg] = '\0';
 	while (digits >= 0)
 	{
-		goal[digits + is_neg] = (-2 * is_neg + 1 ) * (n % 10) + '0';
+		goal[digits + is_neg] = (-2 * is_neg + 1) * (n % 10) + '0';
 		n = n / 10;
 		digits--;
 	}
