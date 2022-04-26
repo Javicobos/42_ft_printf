@@ -1,5 +1,6 @@
 //#include "ft_printf.h"
 #include <stdio.h>
+#include <limits.h>
 
 
 int	ft_printf(const char *str, ...);
@@ -26,8 +27,20 @@ int main()
 	int e = ft_printf("%s is at %p \n", mystring, mystring);
 	int e2 = printf("%s is at %p \n", mystring, mystring);
 	int e3 = printf("my int is %i and C's int is %i\n \n", e, e2);
-	return 0;
 
-	//testing git
-	//test 2
+	int nulos = printf(" NULL %s NULL \n", NULL);
+	int mynulos = ft_printf(" NULL %s NULL \n", NULL);
+	printf("my int is %i and C's int is %i\n \n", mynulos, nulos);
+	
+	int Cpointers = printf(" %p %p \n", LONG_MIN, LONG_MAX);
+	int mypointers = ft_printf(" %p %p \n", LONG_MIN, LONG_MAX);
+	printf("my int is %i and C's int is %i\n \n", mypointers, Cpointers);
+
+	int Cp2 = printf(" %p %p \n", ULONG_MAX, -ULONG_MAX);
+	int myp2 = ft_printf(" %p %p \n", ULONG_MAX, -ULONG_MAX);
+	printf("my int is %i and C's int is %i\n \n", myp2, Cp2);
+
+	int cp3 = printf(" %p %p \n", 0, 0);
+	int myp3 = ft_printf(" %p %p \n", 0, 0);
+	printf("my int is %i and C's int is %i\n \n", myp3, cp3);
 }

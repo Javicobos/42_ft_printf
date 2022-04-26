@@ -6,7 +6,7 @@
 /*   By: jcobos-d <jcobos-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 18:38:30 by jcobos-d          #+#    #+#             */
-/*   Updated: 2022/04/26 12:01:45 by jcobos-d         ###   ########.fr       */
+/*   Updated: 2022/04/26 12:48:56 by jcobos-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,33 +15,32 @@
 int	putnbr_b(long nbr, char *base, int size);
 int	ft_writeabs(int nbr, char *base);
 int	ft_putstr_fd_counter(char *s, int fd);
-int	ft_putptr(long nbr);
 int	print_classify(char c, va_list ap);
+int	ft_putptr(unsigned long nbr, char *base, int size);
 
 int	print_classify(char c, va_list ap)
 {
-	int		retval;
+	int		ret;
 
-	retval = 0;
+	ret = 0;
 	if (c == 's')
-		retval += ft_putstr_fd_counter(va_arg(ap, char *), 1);
+		ret = ft_putstr_fd_counter(va_arg(ap, char *), 1);
 	else if (c == 'p')
 	{
-		retval += write(1, "0x", 2);
-		retval += putnbr_b(va_arg(ap, unsigned long), "0123456789abcdef", 16);
+		ret = write(1, "0x", 2);
+		ret += ft_putptr(va_arg(ap, unsigned long), "0123456789abcdef", 16);
 	}
-		retval += ft_putptr((long)(va_arg(ap, void *)));
 	else if (c == 'd' || c == 'i')
-		retval += putnbr_b(va_arg(ap, int), "0123456789", 10);
+		ret = putnbr_b(va_arg(ap, int), "0123456789", 10);
 	else if (c == 'u')
-		retval += putnbr_b(va_arg(ap, unsigned int), "0123456789", 10);
+		ret = putnbr_b(va_arg(ap, unsigned int), "0123456789", 10);
 	else if (c == 'x')
-		retval += putnbr_b(va_arg(ap, unsigned int), "0123456789abcdef", 16);
+		ret = putnbr_b(va_arg(ap, unsigned int), "0123456789abcdef", 16);
 	else if (c == 'X')
-		retval += putnbr_b(va_arg(ap, unsigned int), "0123456789ABCDEF", 16);
+		ret = putnbr_b(va_arg(ap, unsigned int), "0123456789ABCDEF", 16);
 	else if (c == '%')
-		retval += write(1, "%", 1);
-	return (retval);
+		ret = write(1, "%", 1);
+	return (ret);
 }
 
 int	ft_printf(const char *str, ...)
@@ -78,7 +77,7 @@ int	ft_putstr_fd_counter(char *s, int fd)
 	int	pos;
 
 	if (!s)
-		return (-1);
+		return (write(1, "(null)", 6));
 	pos = 0;
 	while (s[pos])
 	{

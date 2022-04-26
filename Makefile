@@ -6,11 +6,11 @@
 #    By: jcobos-d <jcobos-d@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/04 18:44:02 by jcobos-d          #+#    #+#              #
-#    Updated: 2022/03/21 17:10:15 by jcobos-d         ###   ########.fr        #
+#    Updated: 2022/04/26 12:48:34 by jcobos-d         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS		=	ft_printf.c
+SRCS		=	ft_printf.c pointerprinter.c
 
 B_SRC		=	ft_printf.c 
 
